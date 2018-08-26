@@ -1,7 +1,6 @@
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
-import books from './fixtures/books';
 
 import BookSearch from './components/BookSearch'
 import BookList from './components/BookList'
@@ -15,15 +14,22 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    books: books
+    currentlyReading: [],
+    wantToRead: [],
+    read: []
   }
 
   render() {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <BookSearch onClick={() => this.setState({ showSearchPage: false })}/>
-        ) : <BookList books={this.state.books} onSearch={() => this.setState({ showSearchPage: true }) } />}
+          <BookSearch onClick={() => this.setState({ showSearchPage: false })} />
+        ) : (
+            <BookList currentlyReading={this.state.currentlyReading}
+              wantToRead={this.state.wantToRead}
+              read={this.state.read}
+              onSearch={() => this.setState({ showSearchPage: true })}
+            />)}
       </div>
     )
   }
