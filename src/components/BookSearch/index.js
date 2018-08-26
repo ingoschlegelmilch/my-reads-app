@@ -6,7 +6,8 @@ import { debounce } from 'lodash';
 class BookSearch extends Component {
     state = {
         books: [],
-        query: ''
+        query: '',
+        emptyQuery: false
     }
 
     updateQuery = (event) => {
@@ -37,9 +38,9 @@ class BookSearch extends Component {
      */
     updateBooks = (books) => {
         if (books.error === 'empty query') {
-            this.setState({ books: [] })
+            this.setState({ books: [], emptyQuery: true })
         } else {
-            this.setState({ books })
+            this.setState({ books, emptyQuery: false })
         }
     }
 
@@ -67,6 +68,7 @@ class BookSearch extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
+                        {this.state.emptyQuery ? <li>Sorry, could not find anything</li> : null}
                         {this.state.books.map(book => <li key={book.id}><Book {...book} /></li>)}
                     </ol>
                 </div>
