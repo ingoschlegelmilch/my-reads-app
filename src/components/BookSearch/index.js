@@ -25,9 +25,10 @@ class BookSearch extends Component {
         if (this.state.query === '') {
             this.setState({ books: [] })
         } else {
+            this.setState({ isLoading: true })
             search(this.state.query)
                 .then(response => this.updateBooks(response))
-                .catch(error => console.error(error))
+                .catch(error => this.updateBooks([]) && console.error(error))
         }
     }, 300)
 
@@ -38,9 +39,9 @@ class BookSearch extends Component {
      */
     updateBooks = (books) => {
         if (books.error === 'empty query') {
-            this.setState({ books: [], emptyQuery: true })
+            this.setState({ books: [], emptyQuery: true, isLoading: false })
         } else {
-            this.setState({ books, emptyQuery: false })
+            this.setState({ books, emptyQuery: false, isLoading: false })
         }
     }
 
@@ -68,8 +69,9 @@ class BookSearch extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {this.state.emptyQuery ? <li>Sorry, could not find anything</li> : null}
-                        {this.state.books.map(book => <li key={book.id}><Book {...book} /></li>)}
+                        {!this.state.isLoading && this.state.emptyQuery ? <li>Sorry, could not find anything</li> : null}
+                        {this.state.isLoading ? <li>Loading...</li> : null}
+                        {!this.state.isLoading && this.state.books.map(book => <li key={book.id}><Book {...book} /></li>)}
                     </ol>
                 </div>
             </div>
