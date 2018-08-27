@@ -54,7 +54,7 @@ class BookSearch extends Component {
     }
 
     render() {
-        const { addCurrentlyReading, addWantToRead, addRead } = this.props.controls;
+        const { addCurrentlyReading, addWantToRead, addRead, removeFromShelves } = this.props.controls;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -83,6 +83,7 @@ class BookSearch extends Component {
                                 addCurrentlyReading={() => addCurrentlyReading(book)}
                                 addWantToRead={() => addWantToRead(book)}
                                 addRead={() => addRead(book)}
+                                removeFromShelves={() => removeFromShelves(book)}
                                  />
                             </li>
                         )

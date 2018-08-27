@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Book = ({ title, authors, imageLinks, addCurrentlyReading, addWantToRead, addRead, selected }) => {
-    console.log(selected)
+const Book = ({ title, authors, imageLinks, addCurrentlyReading, addWantToRead, addRead, removeFromShelves, selected }) => {
+    const thumbnail = imageLinks && imageLinks.thumbnail;
     const move = (shelf) => {
         switch (shelf) {
             case 'currentlyReading':
@@ -10,13 +10,14 @@ const Book = ({ title, authors, imageLinks, addCurrentlyReading, addWantToRead, 
                 return addWantToRead();
             case 'read':
                 return addRead();
-            default: console.error(shelf);
+            default: removeFromShelves();
         }
     }
+    const style = Object.assign({ width: 128, height: 193 }, thumbnail ? {backgroundImage: `url(${thumbnail})`} : {})
     return (
         <div className="book">
             <div className="book-top">
-                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${imageLinks.thumbnail})` }}></div>
+                <div className="book-cover" style={style}></div>
                 <div className="book-shelf-changer">
                     <select onChange={(e) => move(e.target.value)} value={selected}>
                         <option value="move" disabled>Move to...</option>
