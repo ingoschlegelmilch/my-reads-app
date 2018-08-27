@@ -3,6 +3,7 @@ import { debounce } from 'lodash';
 import { Link } from 'react-router-dom'
 
 import { search } from '../../BooksAPI'
+import { findSelection } from '../BookList'
 import Book from '../BookList/Bookshelf/Book'
 
 
@@ -78,6 +79,7 @@ class BookSearch extends Component {
                         {!this.state.isLoading && this.state.books.map(book => (
                             <li key={book.id}>
                                 <Book {...book}
+                                selected={findSelection(book, this.props.shelves)}
                                 addCurrentlyReading={() => addCurrentlyReading(book)}
                                 addWantToRead={() => addWantToRead(book)}
                                 addRead={() => addRead(book)}

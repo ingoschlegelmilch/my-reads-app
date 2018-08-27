@@ -1,8 +1,9 @@
 import React from 'react'
 import Book from './Book'
 import { Link } from 'react-router-dom'
+import { findSelection } from '../../BookList'
 
-const Bookshelf = ({ title, books, onEmptyShelf, controls }) => {
+const Bookshelf = ({ title, books, shelves, controls }) => {
     const { addCurrentlyReading, addWantToRead, addRead } = controls;
     return (
         <div className="bookshelf">
@@ -15,6 +16,7 @@ const Bookshelf = ({ title, books, onEmptyShelf, controls }) => {
                             {books.map(book => (
                                 <li key={book.id}>
                                     <Book {...book}
+                                        selected={findSelection(book, shelves)}
                                         addCurrentlyReading={() => addCurrentlyReading(book)}
                                         addWantToRead={() => addWantToRead(book)}
                                         addRead={() => addRead(book)} />

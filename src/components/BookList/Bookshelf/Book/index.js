@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Book = ({ title, authors, imageLinks, addCurrentlyReading, addWantToRead, addRead }) => {
+const Book = ({ title, authors, imageLinks, addCurrentlyReading, addWantToRead, addRead, selected }) => {
+    console.log(selected)
     const move = (shelf) => {
         switch (shelf) {
             case 'currentlyReading':
@@ -17,7 +18,7 @@ const Book = ({ title, authors, imageLinks, addCurrentlyReading, addWantToRead, 
             <div className="book-top">
                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${imageLinks.thumbnail})` }}></div>
                 <div className="book-shelf-changer">
-                    <select onChange={(e) => move(e.target.value)}>
+                    <select onChange={(e) => move(e.target.value)} value={selected}>
                         <option value="move" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>

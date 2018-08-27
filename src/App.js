@@ -63,16 +63,18 @@ class BooksApp extends React.Component {
       addWantToRead: this.addWantToRead,
       addRead: this.addRead
     };
+    const shelves = {
+      currentlyReading: Object.values(this.state.currentlyReading), 
+      wantToRead: Object.values(this.state.wantToRead), 
+      read: Object.values(this.state.read)
+    }
     return (
       <Router>
         <div className="app">
-          <Route exact path="/" render={(props) => (
-            <BookList controls={controls}
-              currentlyReading={Object.values(this.state.currentlyReading)}
-              wantToRead={Object.values(this.state.wantToRead)}
-              read={Object.values(this.state.read)} />
+          <Route exact path="/" render={() => (
+            <BookList shelves={shelves} controls={controls}/>
           )} />
-          <Route path="/search" render={(props) => <BookSearch controls={controls} />} />
+          <Route path="/search" render={() => <BookSearch shelves={shelves} controls={controls} />} />
         </div>
       </Router>
     )
