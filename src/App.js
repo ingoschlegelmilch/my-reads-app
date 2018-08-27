@@ -20,28 +20,44 @@ class BooksApp extends React.Component {
     read: {}
   }
 
+  persist = (currentlyReading, wantToRead, read) => {
+    localStorage.setItem("currentlyReading", JSON.stringify(currentlyReading));
+    localStorage.setItem("wantToRead", JSON.stringify(wantToRead));
+    localStorage.setItem("read", JSON.stringify(read));
+    
+    this.setState({currentlyReading, wantToRead, read })
+  }
+
   addCurrentlyReading = (book) => {
-    this.setState({
-      currentlyReading: { ...this.state.currentlyReading, [book.id]: book },
-      wantToRead: omit(this.state.wantToRead, [book.id]),
-      read: omit(this.state.read, [book.id]),
-    })
+    const currentlyReading = { ...this.state.currentlyReading, [book.id]: book }
+    const wantToRead = omit(this.state.wantToRead, [book.id]);
+    const read = omit(this.state.read, [book.id]);
+    
+    this.persist(currentlyReading, wantToRead, read)
   }
 
   addWantToRead = (book) => {
-    this.setState({
-      currentlyReading: omit(this.state.currentlyReading, [book.id]),
-      wantToRead: { ...this.state.wantToRead, [book.id]: book },
-      read: omit(this.state.read, [book.id])
-    })
+    const currentlyReading = omit(this.state.currentlyReading, [book.id]);
+    const wantToRead = { ...this.state.wantToRead, [book.id]: book }
+    const read = omit(this.state.read, [book.id]);
+    
+    this.persist(currentlyReading, wantToRead, read);
   }
 
   addRead = (book) => {
-    this.setState({
-      currentlyReading: omit(this.state.currentlyReading, [book.id]),
-      wantToRead: omit(this.state.wantToRead, [book.id]),
-      read: { ...this.state.read, [book.id]: book }
-    })
+    const currentlyReading = omit(this.state.currentlyReading, [book.id]);
+    const wantToRead = omit(this.state.wantToRead, [book.id]);
+    const read = { ...this.state.read, [book.id]: book };
+    
+    this.persist(currentlyReading, wantToRead, read);
+  }
+
+  componentDidMount() {
+    const currentlyReading = JSON.parse(localStorage.getItem('currentlyReading') || "{}");
+    const wantToRead = JSON.parse(localStorage.getItem('wantToRead') || "{}") ;
+    const read       = JSON.parse(localStorage.getItem('read') || "{}");
+
+    this.setState({currentlyReading, wantToRead, read})
   }
 
   render() {
