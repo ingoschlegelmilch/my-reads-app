@@ -1,5 +1,6 @@
 import React from 'react'
 import Bookshelf from './Bookshelf'
+import { Link } from 'react-router-dom'
 
 const BookList = ({ currentlyReading, wantToRead, read, onSearch, controls }) => (
     <div className="list-books">
@@ -23,7 +24,7 @@ const BookList = ({ currentlyReading, wantToRead, read, onSearch, controls }) =>
             </div>
         </div>
         <div className="open-search">
-            <a onClick={() => onSearch()}>Add a book</a>
+            <Link to="/search">Add a book</Link>
         </div>
     </div>
 

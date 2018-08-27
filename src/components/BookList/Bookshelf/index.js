@@ -1,5 +1,6 @@
 import React from 'react'
 import Book from './Book'
+import { Link } from 'react-router-dom'
 
 const Bookshelf = ({ title, books, onEmptyShelf, controls }) => {
     const { addCurrentlyReading, addWantToRead, addRead } = controls;
@@ -8,7 +9,7 @@ const Bookshelf = ({ title, books, onEmptyShelf, controls }) => {
             <h2 className="bookshelf-title">{title}</h2>
             <div className="bookshelf-books">
                 {books.length === 0 ? (
-                    <span>There are no books on this shelf, yet. <a onClick={() => onEmptyShelf()}>Add a book</a></span>
+                    <p>There are no books on this shelf, yet. <Link to="/search">Add a book</Link></p>
                 ) : (
                         <ol className="books-grid">
                             {books.map(book => (
