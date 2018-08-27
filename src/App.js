@@ -1,6 +1,7 @@
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
+import { omit } from 'lodash'
 
 import BookSearch from './components/BookSearch'
 import BookList from './components/BookList'
@@ -14,20 +15,52 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    currentlyReading: [],
-    wantToRead: [],
-    read: []
+    currentlyReading: {},
+    wantToRead: {},
+    read: {}
+  }
+
+  addCurrentlyReading = (book) => {
+    this.setState({
+      currentlyReading: { ...this.state.currentlyReading, [book.id]: book },
+      wantToRead: omit(this.state.wantToRead, [book.id]),
+      read: omit(this.state.read, [book.id]),
+    })
+  }
+
+  addWantToRead = (book) => {
+    this.setState({
+      currentlyReading: omit(this.state.currentlyReading, [book.id]),
+      wantToRead: { ...this.state.wantToRead, [book.id]: book },
+      read: omit(this.state.read, [book.id])
+    })
+  }
+
+  addRead = (book) => {
+    this.setState({
+      currentlyReading: omit(this.state.currentlyReading, [book.id]),
+      wantToRead: omit(this.state.wantToRead, [book.id]),
+      read: { ...this.state.read, [book.id]: book }
+    })
   }
 
   render() {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <BookSearch onClick={() => this.setState({ showSearchPage: false })} />
+          <BookSearch
+            addCurrentlyReading={this.addCurrentlyReading}
+            addWantToRead={this.addWantToRead}
+            addRead={this.addRead}
+            onClick={() => this.setState({ showSearchPage: false })} />
         ) : (
-            <BookList currentlyReading={this.state.currentlyReading}
-              wantToRead={this.state.wantToRead}
-              read={this.state.read}
+            <BookList
+              currentlyReading={Object.values(this.state.currentlyReading)}
+              addCurrentlyReading={this.addCurrentlyReading}
+              wantToRead={Object.values(this.state.wantToRead)}
+              addWantToRead={this.addWantToRead}
+              read={Object.values(this.state.read)}
+              addRead={this.addRead}
               onSearch={() => this.setState({ showSearchPage: true })}
             />)}
       </div>

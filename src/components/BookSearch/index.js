@@ -71,7 +71,16 @@ class BookSearch extends Component {
                     <ol className="books-grid">
                         {!this.state.isLoading && this.state.emptyQuery ? <li>Sorry, could not find anything</li> : null}
                         {this.state.isLoading ? <li>Loading...</li> : null}
-                        {!this.state.isLoading && this.state.books.map(book => <li key={book.id}><Book {...book} /></li>)}
+                        {!this.state.isLoading && this.state.books.map(book => (
+                            <li key={book.id}>
+                                <Book {...book}
+                                addCurrentlyReading={() => this.props.addCurrentlyReading(book)}
+                                addWantToRead={() => this.props.addWantToRead(book)}
+                                addRead={() => this.props.addRead(book)}
+                                 />
+                            </li>
+                        )
+                        )}
                     </ol>
                 </div>
             </div>

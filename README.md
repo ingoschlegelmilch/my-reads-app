@@ -4,6 +4,13 @@ This is the starter template for the final assessment project for Udacity's Reac
 
 Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
 
+## Solution
+
+### Known issues (TODO)
+
+Select items have an initial value, selecting that same value won't add it to another list, due to a missing `onChange` handler.
+We'll ignore this use case for now.
+
 ## TL;DR
 
 To get started developing right away:
@@ -90,3 +97,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+

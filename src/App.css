@@ -62,6 +62,9 @@ body, .app {
   font-size: 0;
 }
 
+.open-search a:hover {
+  cursor: pointer;
+}
 /* search page */
 
 .search-books-bar {
@@ -153,6 +156,14 @@ body, .app {
   background-position: center;
   background-size: 20px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: all .25s ease-in-out;
+  transform-origin: 50% 50% 0;
+}
+.book-shelf-changer:hover {
+  cursor: pointer;
+  background: #52934f;
+  transform: scale(1.2);
+  background-image: url('./icons/arrow-drop-down.svg');
 }
 .book-shelf-changer select {
   width: 100%;
