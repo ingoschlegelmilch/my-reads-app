@@ -45,22 +45,23 @@ class BooksApp extends React.Component {
   }
 
   render() {
+    const controls = {
+      addCurrentlyReading: this.addCurrentlyReading,
+      addWantToRead: this.addWantToRead,
+      addRead: this.addRead
+    };
     return (
       <div className="app">
         {this.state.showSearchPage ? (
           <BookSearch
-            addCurrentlyReading={this.addCurrentlyReading}
-            addWantToRead={this.addWantToRead}
-            addRead={this.addRead}
+            controls={controls}
             onClick={() => this.setState({ showSearchPage: false })} />
         ) : (
             <BookList
+              controls={controls}
               currentlyReading={Object.values(this.state.currentlyReading)}
-              addCurrentlyReading={this.addCurrentlyReading}
               wantToRead={Object.values(this.state.wantToRead)}
-              addWantToRead={this.addWantToRead}
               read={Object.values(this.state.read)}
-              addRead={this.addRead}
               onSearch={() => this.setState({ showSearchPage: true })}
             />)}
       </div>

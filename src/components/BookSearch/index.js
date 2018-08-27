@@ -50,6 +50,7 @@ class BookSearch extends Component {
     }
 
     render() {
+        const { addCurrentlyReading, addWantToRead, addRead } = this.props.controls;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -74,9 +75,9 @@ class BookSearch extends Component {
                         {!this.state.isLoading && this.state.books.map(book => (
                             <li key={book.id}>
                                 <Book {...book}
-                                addCurrentlyReading={() => this.props.addCurrentlyReading(book)}
-                                addWantToRead={() => this.props.addWantToRead(book)}
-                                addRead={() => this.props.addRead(book)}
+                                addCurrentlyReading={() => addCurrentlyReading(book)}
+                                addWantToRead={() => addWantToRead(book)}
+                                addRead={() => addRead(book)}
                                  />
                             </li>
                         )

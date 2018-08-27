@@ -1,7 +1,7 @@
 import React from 'react'
 import Bookshelf from './Bookshelf'
 
-const BookList = ({ currentlyReading, wantToRead, read, onSearch, addCurrentlyReading, addWantToRead, addRead }) => (
+const BookList = ({ currentlyReading, wantToRead, read, onSearch, controls }) => (
     <div className="list-books">
         <div className="list-books-title">
             <h1>MyReads</h1>
@@ -9,21 +9,15 @@ const BookList = ({ currentlyReading, wantToRead, read, onSearch, addCurrentlyRe
         <div className="list-books-content">
             <div>
                 <Bookshelf title="Currently Reading"
-                    addCurrentlyReading={addCurrentlyReading}
-                    addRead={addRead}
-                    addWantToRead={addWantToRead}
+                    controls={controls}
                     books={currentlyReading}
                     onEmptyShelf={onSearch} />
                 <Bookshelf title="Want to read"
-                    addCurrentlyReading={addCurrentlyReading}
-                    addRead={addRead}
-                    addWantToRead={addWantToRead}
+                    controls={controls}
                     books={wantToRead}
                     onEmptyShelf={onSearch} />
                 <Bookshelf title="Read"
-                    addCurrentlyReading={addCurrentlyReading}
-                    addRead={addRead}
-                    addWantToRead={addWantToRead}
+                    controls={controls}
                     books={read}
                     onEmptyShelf={onSearch} />
             </div>
@@ -32,7 +26,7 @@ const BookList = ({ currentlyReading, wantToRead, read, onSearch, addCurrentlyRe
             <a onClick={() => onSearch()}>Add a book</a>
         </div>
     </div>
-    
+
 )
 
 export default BookList
