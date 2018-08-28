@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { findSelection } from '../../BookList'
 
 const Bookshelf = ({ title, books, shelves, controls }) => {
-    const { addCurrentlyReading, addWantToRead, addRead, removeFromShelves } = controls;
+    const { addCurrentlyReading, addWantToRead, addRead, addToNone, removeFromShelves } = controls;
     return (
         <div className="bookshelf">
             <h2 className="bookshelf-title">{title}</h2>
@@ -20,6 +20,7 @@ const Bookshelf = ({ title, books, shelves, controls }) => {
                                         addCurrentlyReading={() => addCurrentlyReading(book)}
                                         addWantToRead={() => addWantToRead(book)}
                                         addRead={() => addRead(book)}
+                                        addToNone={() => addToNone(book)}
                                         removeFromShelves={() => removeFromShelves(book)} />
                                 </li>))
                             }

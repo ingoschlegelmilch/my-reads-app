@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Book = ({ title, authors, imageLinks, addCurrentlyReading, addWantToRead, addRead, removeFromShelves, selected }) => {
+const Book = ({ title, authors, imageLinks, addCurrentlyReading, addWantToRead, addRead, addToNone, removeFromShelves, selected }) => {
     const thumbnail = imageLinks && imageLinks.thumbnail;
     const move = (shelf) => {
         switch (shelf) {
@@ -10,6 +10,8 @@ const Book = ({ title, authors, imageLinks, addCurrentlyReading, addWantToRead, 
                 return addWantToRead();
             case 'read':
                 return addRead();
+            case 'none':
+                return addToNone();
             default: removeFromShelves();
         }
     }

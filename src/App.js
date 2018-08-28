@@ -22,24 +22,30 @@ class BooksApp extends React.Component {
     const shelf = 'currentlyReading'
     const updatedBook = {...book, shelf}
     update(book, shelf)
-    this.addToLocalStorage(updatedBook)    
+    this.addToLocalState(updatedBook)    
   }
 
   addWantToRead = (book) => {
     const shelf = 'wantToRead'
     const updatedBook = {...book, shelf}
     update(updatedBook, shelf)
-    this.addToLocalStorage(updatedBook)
+    this.addToLocalState(updatedBook)
   }
 
   addRead = (book) => {
     const shelf = 'read'
     const updatedBook = {...book, shelf}
     update(updatedBook, shelf)
-    this.addToLocalStorage(updatedBook)
+    this.addToLocalState(updatedBook)
   }
 
-  removeFromShelves = (book, callback = () => { console.log(`removed ${book.title} from all shelves`)}) => {
+  addToNone = (book) => {
+    update(book, 'none')
+    this.removeFromShelves(book)
+  }
+  removeFromShelves = (book, callback = () => { 
+    console.log(`removed ${book.title} from all shelves`)
+  }) => {
     this.setState({
       currentlyReading: omit(this.state.currentlyReading, [book.id]),
       wantToRead: omit(this.state.wantToRead, [book.id]),
@@ -59,7 +65,7 @@ class BooksApp extends React.Component {
   /**
    * We look up the shelf and pull out all books and add the new one.
    */ 
-  addToLocalStorage = (book) => {
+  addToLocalState = (book) => {
     const shelf = book.shelf;
     // first we remove the book from all shelves
     this.removeFromShelves(book, () => {
@@ -77,7 +83,7 @@ class BooksApp extends React.Component {
   }
 
   hydrateShelves = (books) => {
-    books.map(book => this.addToLocalStorage(book))
+    books.map(book => this.addToLocalState(book))
   }
 
   render() {
@@ -85,6 +91,7 @@ class BooksApp extends React.Component {
       addCurrentlyReading: this.addCurrentlyReading,
       addWantToRead: this.addWantToRead,
       addRead: this.addRead,
+      addToNone: this.addToNone,
       removeFromShelves: this.removeFromShelves
     };
     const shelves = {
