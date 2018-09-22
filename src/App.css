@@ -53,17 +53,25 @@ body, .app {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #2e7d32;
+  background: #60ac5d;
   background-image: url('./icons/add.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
+  transform: scale(1.0);
+  transition: all .25s ease-in-out;
 }
 
 .open-search a:hover {
+  background: #52934f;
+  background-image: url('./icons/add.svg');
+  background-repeat: no-repeat;
+  background-position: center;
   cursor: pointer;
+  transform: scale(1.2);
+  transition: all .25s ease-in-out;
 }
 /* search page */
 
@@ -156,14 +164,17 @@ body, .app {
   background-position: center;
   background-size: 20px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transform: scale(1.0);
   transition: all .25s ease-in-out;
-  transform-origin: 50% 50% 0;
 }
 .book-shelf-changer:hover {
   cursor: pointer;
   background: #52934f;
-  transform: scale(1.2);
   background-image: url('./icons/arrow-drop-down.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: scale(1.2);
+  transition: all .25s ease-in-out;
 }
 .book-shelf-changer select {
   width: 100%;
